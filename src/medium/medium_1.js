@@ -23,7 +23,7 @@ export function getSum(array) {
  * console.log(getMedian(array)); // 4.5
  */
 export function getMedian(array) {
-  var med = (Math.min(array) + Math.max(array)) / array.length;
+  var med = (Math.min(...array) + Math.max(...array)) / 2;
   return med;
 }
 
@@ -51,11 +51,12 @@ export function getStatistics(array) {
         "length": array.length,
         "sum": array.reduce((a, b) => a + b),
         "mean": array.reduce((a, b) => a + b) / array.length,
-        "median": Math.median(array),
-        "min": Math.min(array),
-        "max": Math.max(array),
-        "variance": variance(array, this.mean) / array.length,
-        "standard_deviation": Math.standard_deviation(array)
+        "median": getMedian(array),
+        //this Median is weird, should it be the middle one or the average of min + max?
+        "min": Math.min(...array),
+        "max": Math.max(...array),
+        "variance": variance(array, array.reduce((a, b) => a + b) / array.length),
+        "standard_deviation": variance(array, array.reduce((a, b) => a + b) / array.length)**0.5
     };
     return result;
 }
