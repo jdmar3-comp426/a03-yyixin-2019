@@ -6,10 +6,7 @@
  * returns: { type: 'number', value: 4 }
  */
 export function identifyVariable(variable) {
-  return {
-     type: variable.type,
-     value: variable.value
-  }
+  return {type: typeof variable, value: variable};
 }
 
 
@@ -29,7 +26,7 @@ export function identifyVariable(variable) {
 export function identifyArray(array) {
    let identifier = [];
    array.forEach(element => {
-      identifier.push({"type": element.type, "value": element.value});
+      identifier.push({type: typeof element, value: element});
    });
    return identifier;
 }
@@ -72,8 +69,13 @@ export function removeKey(object, key) {
  If only `removeKeyNonDestructive` was called, nothing would have changed.
  */
 export function removeKeyNonDestructive(object, key) {
-  let remove = object.clone();
-  delete remove[key];
+  let remove = {};
+  let list = Object.keys(object);
+  list.forEach(reKey => {
+    if (reKey != key) {
+      remove[reKey] = object[reKey];
+    }
+  });
   return remove;
 }
 
@@ -99,7 +101,11 @@ export function removeKeyNonDestructive(object, key) {
  * @return {*} The object with its keys removed.
  */
 export function removeKeys(object, keyList) {
-   let remove = object.clone();
+  let remove = {};
+  let list = Object.keys(object);
+  list.forEach(reKey => {
+      remove[reKey] = object[reKey];
+  });
    keyList.forEach(key => {
       remove = removeKeyNonDestructive(remove, key);
    });
