@@ -58,6 +58,6 @@ export function getStatistics(array) {
         "variance": variance(array, array.reduce((a, b) => a + b) / array.length),
         "standard_deviation": variance(array, array.reduce((a, b) => a + b) / array.length)**0.5
     };
-    return result;
+    return result;  
 }
 
