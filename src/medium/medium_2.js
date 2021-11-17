@@ -23,7 +23,7 @@ export const allCarStats = {
     //avgMpg: mpg_data.map(car => {
     //    return car.city_mpg + car.highway_mpg;
     //  }).reduce((a, b) => a + b) / mpg_data.length,
-    avgMpg = {
+    avgMpg: {
         city: mpg_data.map(car => {
             return car.city_mpg;
         }).reduce((a, b) => a + b) / mpg_data.length,
