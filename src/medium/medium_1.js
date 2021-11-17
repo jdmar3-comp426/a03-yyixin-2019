@@ -24,9 +24,9 @@ export function getSum(array) {
  */
 export function getMedian(array) {
   //var med = (Math.min(...array) + Math.max(...array)) / 2;
-  const mid = Math.floor(arr.length / 2),
-    nums = [...arr].sort((a, b) => a - b);
-  return arr.length % 2 !== 0 ? nums[mid] : (nums[mid - 1] + nums[mid]) / 2;
+  const mid = Math.floor(array.length / 2),
+    nums = [...array].sort((a, b) => a - b);
+  return array.length % 2 !== 0 ? nums[mid] : (nums[mid - 1] + nums[mid]) / 2;
   //return med;
 }
 
