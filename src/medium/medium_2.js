@@ -23,12 +23,13 @@ export const allCarStats = {
     //avgMpg: mpg_data.map(car => {
     //    return car.city_mpg + car.highway_mpg;
     //  }).reduce((a, b) => a + b) / mpg_data.length,
-    avgMpg: {mpg_data.map(car => {
-        return car.city_mpg;
-      }).reduce((a, b) => a + b) / mpg_data.length,
-          mpg_data.map(car => {
-        return car.highway_mpg;
-      }).reduce((a, b) => a + b) / mpg_data.length,
+    avgMpg = {
+        city: mpg_data.map(car => {
+            return car.city_mpg;
+        }).reduce((a, b) => a + b) / mpg_data.length,
+        highway: mpg_data.map(car => {
+            return car.highway_mpg;
+        }).reduce((a, b) => a + b) / mpg_data.length,
     },
     allYearStats: getStatistics(mpg_data.map(car => {
         return car.year;
