@@ -21,9 +21,7 @@ see under the methods section
  */
 export const allCarStats = {
     avgMpg: 
-    {
-        
-        city: mpg_data.map(car => {
+    {   city: mpg_data.map(car => {
             return car.city_mpg;
         }).reduce((a, b) => a + b) / mpg_data.length,
         highway: mpg_data.map(car => {
@@ -97,6 +95,42 @@ export const allCarStats = {
  * }
  */
 export const moreStats = {
-    makerHybrids: undefined,
-    avgMpgByYearAndHybrid: undefined
+    makerHybrids: 
+        mpg_data.filter(car => {
+            return car.hybrid;
+        })).reduce(function (acc, obj) {
+            let key = obj['make']
+            if (!acc[key]) {
+                acc[key] = {
+                    "make": key,
+                    "hybrids": []
+                }
+            }
+            acc[key]['hybrids'].push(obj['id'])
+            return acc
+        }, {}),
+    avgMpgByYearAndHybrid: 
+        mpg_data.reduce(function (acc, obj) {
+            let key = obj['year']
+            if (!acc[key]) {
+                acc[key] = {
+                    hybrid: {
+                        city: 0,
+                        highway: 0
+                    },
+                    notHybrid: {
+                        city: 0,
+                        highway: 0
+                    }
+                }
+            }
+            if (obj['hybrid']) {
+                acc[key]['hybrid']['city'] = obj['city_mpg'] +acc[key]['hybrid']['city']
+                acc[key]['hybrid']['highway'] = obj['highway_mpg'] +acc[key]['hybrid']['highway']
+            } else {
+                acc[key]['notHybrid']['city'] = obj['city_mpg'] +acc[key]['notHybrid']['city']
+                acc[key]['notHybrid']['highway'] = obj['highway_mpg'] +acc[key]['notHybrid']['highway']
+            }
+            return acc
+        }, {})
 };
